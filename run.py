@@ -98,7 +98,7 @@ def play_game():
 
     while True:
         print("Your grid:")
-         print_grid(user_grid, True)
+        print_grid(user_grid)
 
         user_row, user_col = get_user_guess(grid_size)
 
