@@ -7,14 +7,13 @@ def create_grid(size):
     return [[' ' for _ in range(size)] for _ in range(size)]
 
 def print_grid(grid):
-    """
-    The function will print the game grid.
-    """
-    for row in grid:
-        print(' | '.join(row))
-        print('-' * (4 * len(row) - 1))
-
-       
+    print("   1   2   3   4   5")
+    print("  " + "-" * 19)
+    for i, row in enumerate(grid):
+        print(chr(ord('A') + i) + " | " + " | ".join(row) + " |")
+        print("  " + "-" * 19)
+    print()
+     
 def place_ships(grid, num_ships):
     """
     Will place the ships randomly on the grid
@@ -26,7 +25,6 @@ def place_ships(grid, num_ships):
             ship_row = random.randint(0, len(grid) - 1)
             ship_col = random.randint(0, len(grid[0]) - 1)
         grid[ship_row][ship_col] = 'S'
-
 
 def get_user_guess(size):
     """
