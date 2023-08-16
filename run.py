@@ -31,7 +31,7 @@ def get_user_guess(size):
     Function that will make the player guesses possible
     """
     while True:
-        guess = input(f"Enter your guess (e.g., A3): ").strip().upper()
+        guess = input(f"Enter your guess (e.g., A3):/n ").strip().upper()
         if len(guess) != 2 or not guess[0].isalpha() or not guess[1].isdigit():
             print("Invalid input. Please use the format: LetterNumber (e.g., A3)")
             continue
@@ -40,7 +40,7 @@ def get_user_guess(size):
         col = int(guess[1]) - 1
 
         if row < 0 or row >= size or col < 0 or col >= size:
-            print("Guess is off-grid. Try again.")
+            print("Guess is off-grid. Try again./n")
             continue
 
         return row, col
@@ -57,6 +57,9 @@ def computer_guess(size):
 def is_ship_sunk(grid, row, col):
     return grid[row][col] == 'X'
 
+def all_ships_sunk(grid):
+    return all(cell == 'X' for row in grid for cell in row)
+
 def play_game():
     """
     This code represents the main loop of the game.
@@ -70,6 +73,27 @@ def play_game():
     place_ships(computer_grid, num_ships)
 
     print("Welcome to Battleships!")
+    print("You will now place your ships on the grid.")
+
+    for i in range(num_ships):
+        print_grid(user_grid)
+        while True:
+            user_input = input(f"Enter position for ship {i+1} (e.g., A3): ").strip().upper()
+            if len(user_input) != 2 or not user_input[0].isalpha() or not user_input[1].isdigit():
+                print("Invalid input. Please use the format: LetterNumber (e.g., A3)")
+                continue
+
+            row = ord(user_input[0]) - ord('A')
+            col = int(user_input[1]) - 1
+
+            if row < 0 or row >= grid_size or col < 0 or col >= grid_size or user_grid[row][col] == 'S':
+                print("Invalid position. Try again.")
+                continue
+
+            user_grid[row][col] = 'S'
+            break
+
+    print("Your ships are placed. Let's start the game!")
     print("Guess the positions of the computer's ships.")
 
     while True:
