@@ -98,19 +98,23 @@ def play_game():
 
     while True:
         print("Your grid:")
-        print_grid(user_grid)
+         print_grid(user_grid, True)
 
         user_row, user_col = get_user_guess(grid_size)
 
         if computer_grid[user_row][user_col] == 'S':
             print("Congratulations! You hit a ship!")
             user_grid[user_row][user_col] = 'X'
+
+            if is_ship_sunk(user_grid, user_row, user_col):
+                print("You sank a ship!")
+
         else:
             print("Sorry, it's a miss.")
             user_grid[user_row][user_col] = 'O'
 
         if all(cell == 'X' for row in user_grid for cell in row):
-            print("Congratulations! You sank all the ships!")
+            print("Congratulations! You sank all the computer's ships. You win!")
             break
 
         print("Computer's turn:")
@@ -119,12 +123,16 @@ def play_game():
         if user_grid[computer_row][computer_col] == 'S':
             print("Oh no! The computer hit your ship!")
             user_grid[computer_row][computer_col] = 'X'
+
+            if is_ship_sunk(user_grid, computer_row, computer_col):
+                print("The computer sank your ship!")
+
         else:
             print("Phew! The computer missed.")
             user_grid[computer_row][computer_col] = 'O'
 
         if all(cell == 'X' for row in user_grid for cell in row):
-            print("Oh no! The computer sank all your ships!")
+            print("Oh no! The computer sank all your ships. You lose!")
             break
 
 play_game()
