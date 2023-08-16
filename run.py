@@ -6,7 +6,10 @@ def create_grid(size):
     """
     return [[' ' for _ in range(size)] for _ in range(size)]
 
-    def print_grid(grid):
+def print_grid(grid):
+    """
+    The function will print the game grid.
+    """
     for row in grid:
         print(' | '.join(row))
         print('-' * (4 * len(row) - 1))
