@@ -56,6 +56,9 @@ def computer_guess(size):
     guess_col = random.randint(0, size - 1)
     return guess_row, guess_col
 
+def is_ship_sunk(grid, row, col):
+    return grid[row][col] == 'X'
+
 def play_game():
     """
     This code represents the main loop of the game.
