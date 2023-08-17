@@ -31,7 +31,7 @@ def get_user_guess(size):
     Function that will make the player guesses possible
     """
     while True:
-        guess = input(f"Enter your guess (e.g., A3):/n ").strip().upper()
+        guess = input(f"Enter your guess (e.g., A3): ").strip().upper()
         if len(guess) != 2 or not guess[0].isalpha() or not guess[1].isdigit():
             print("Invalid input. Please use the format: LetterNumber (e.g., A3)")
             continue
@@ -40,7 +40,7 @@ def get_user_guess(size):
         col = int(guess[1]) - 1
 
         if row < 0 or row >= size or col < 0 or col >= size:
-            print("Guess is off-grid. Try again./n")
+            print("Guess is off-grid. Try again.")
             continue
 
         return row, col
@@ -74,6 +74,7 @@ def play_game():
 
     print("Welcome to Battleships!")
     print("You will now place your ships on the grid.")
+    print("------------------------------------")
 
     for i in range(num_ships):
         print_grid(user_grid)
@@ -95,10 +96,11 @@ def play_game():
 
     print("Your ships are placed. Let's start the game!")
     print("Guess the positions of the computer's ships.")
+    print("------------------------------------")
 
     while True:
         print("Your grid:")
-        print_grid(user_grid)
+        print_grid(user_grid,)
 
         user_row, user_col = get_user_guess(grid_size)
 
